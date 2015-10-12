@@ -128,7 +128,7 @@ module TinySegmenter
     _ctype(chartype, convert(US, str))
   end
 
-  function tokenize(segmenter::Segmenter, text::US)
+  function tokenize(segmenter::Segmenter, text::AbstractString)
     if isempty(text)
       return []
     end
