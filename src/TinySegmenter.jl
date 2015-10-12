@@ -130,10 +130,10 @@ module TinySegmenter
 
   function tokenize(segmenter::Segmenter, text::AbstractString)
     if isempty(text)
-      return []
+      return US[]
     end
 
-    result = []
+    result = US[]
     segment = [US("B3"), US("B2"), US("B1")]
     ctype = ["O", "O", "O"]
     for char in text
