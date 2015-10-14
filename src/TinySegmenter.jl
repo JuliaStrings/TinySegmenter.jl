@@ -76,6 +76,8 @@ for (chars,cat) in (
       CHARDICT[c] = cat
   end
 end
+const Achar = UInt8('A')
+const Ichar = UInt8('I')
 const Hchar = UInt8('H')
 const Ochar = UInt8('O')
 const Uchar = UInt8('U')
@@ -120,9 +122,9 @@ function tokenize(text::AbstractString)
     c5 = ctype[i+1]
     c6 = ctype[i+2]
 
-    score += get(UP1, p1, 0)
-    score += get(UP2, p2, 0)
-    score += get(UP3, p3, 0)
+    if p1 == Ochar; score += -214; end # score += get(UP1, p1, 0)
+    if p2 == Bchar; score += 69; elseif p2 == Ochar; score += 935; end # score += get(UP2, p2, 0)
+    if p3 == Bchar; score += 189; end # score += get(UP3, p3, 0)
     score += get(BP1, (p1, p2), 0)
     score += get(BP2, (p2, p3), 0)
     score += get(UW1, w1, 0)
@@ -140,7 +142,7 @@ function tokenize(text::AbstractString)
     score += get(TW4, (w4, w5, w6), 0)
     score += get(UC1, c1, 0)
     score += get(UC2, c2, 0)
-    score += get(UC3, c3, 0)
+    if c3 == Achar; score += -1370; elseif c3 == Ichar; score += 2311; end # score += get(UC3, c3, 0)
     score += get(UC4, c4, 0)
     score += get(UC5, c5, 0)
     score += get(UC6, c6, 0)
