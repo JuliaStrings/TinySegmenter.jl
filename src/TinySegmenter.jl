@@ -74,14 +74,14 @@ function tokenize(text::AbstractString)
   end
 
   result = US[]
-  segment = [US("B3"), US("B2"), US("B1")]
+  segment = US["B3", "B2", "B1"]
   ctype = ['O', 'O', 'O']
   for char in text
     push!(segment, string(char))
     push!(ctype, _ctype(char))
   end
 
-  segment = vcat(segment, [US("E1"), US("E2"), US("E3")])
+  segment = vcat(segment, US["E1", "E2", "E3"])
   ctype = vcat(ctype, ['O', 'O', 'O'])
 
   word = segment[4]
