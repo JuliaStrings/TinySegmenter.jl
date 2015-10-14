@@ -7,9 +7,13 @@ originaly written in JavaScript by Mr. Taku Kudo.
 
 ## Usage
 
-```julia
+```jl
 using TinySegmenter
 
 join(tokenize("私の名前は中野です"), " | ")
 # "私 | の | 名前 | は | 中野 | です"
 ```
+
+The return value of `tokenize` is an array of substrings of the string input,
+giving the locations of the tokens in the text.  (Substrings are represented
+by the `SubString` Julia type.)

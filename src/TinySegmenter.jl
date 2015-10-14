@@ -87,12 +87,19 @@ function _ctype(c::Char)
   return get(CHARDICT, c, '一' <= c <= '龠' ? Hchar : Ochar)
 end
 
-function tokenize(text::AbstractString)
-  if isempty(text)
-    return US[]
-  end
+"""
+    tokenize(text::AbstractString)
 
-  result = US[]
+Given a `text` string, `tokenize` attempts to segment it into a list
+of words, and in particular tries to segment Japanese Kanji text
+into words ("tokens" or "segments"), using the heuristic TinySegmenter algorithm.
+It returns an array of substrings consisting of the guessed tokens in
+`text`, in the order that they appear.
+"""
+function tokenize{T<:AbstractString}(text::T)
+  result = SubString{T}[]
+  isempty(text) && return result
+
   segment = [B3, B2, B1]
   ctype = UInt8['O', 'O', 'O']
   for char in text
@@ -103,8 +110,8 @@ function tokenize(text::AbstractString)
   segment = vcat(segment, [E1, E2, E3])
   ctype = vcat(ctype, UInt8['O', 'O', 'O'])
 
-  word = IOBuffer()
-  print(word, segment[4])
+  wordstart = start(text)
+  pos = wordstart
   p1 = Uchar
   p2 = Uchar
   p3 = Uchar
@@ -163,17 +170,19 @@ function tokenize(text::AbstractString)
     score += get(TQ4, (p3, c2, c3, c4), 0)
     p = Ochar
     if score > 0
-      push!(result, takebuf_string(word))
+      push!(result, SubString(text, wordstart, pos))
+      wordstart = pos = nextind(text, pos)
       p = Bchar
+    else
+      pos = nextind(text, pos) # text[pos] == segment[i]
     end
 
     p1 = p2
     p2 = p3
     p3 = p
-    print(word, segment[i])
   end
 
-  push!(result, takebuf_string(word))
+  push!(result, SubString(text, wordstart, pos))
   return result
 end
 
