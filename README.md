@@ -10,7 +10,6 @@ originaly written in JavaScript by Mr. Taku Kudo.
 ```julia
 using TinySegmenter
 
-segmenter = Segmenter();
-join(tokenize(segmenter, "私の名前は中野です"), " | ")
+join(tokenize("私の名前は中野です"), " | ")
 # "私 | の | 名前 | は | 中野 | です"
 ```
