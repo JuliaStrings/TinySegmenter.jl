@@ -15,7 +15,6 @@ const B2 = Char(0x110002)
 const B3 = Char(0x110003)
 const E1 = Char(0x110004)
 const E2 = Char(0x110005)
-const E3 = Char(0x110006)
 
 const BIAS = -332
 
@@ -83,7 +82,7 @@ const Hchar = UInt8('H')
 const Ochar = UInt8('O')
 const Uchar = UInt8('U')
 const Bchar = UInt8('B')
-function _ctype(c::Char)
+function ctype(c::Char)
   return get(CHARDICT, c, '一' <= c <= '龠' ? Hchar : Ochar)
 end
 
@@ -100,35 +99,49 @@ function tokenize{T<:AbstractString}(text::T)
   result = SubString{T}[]
   isempty(text) && return result
 
-  segment = [B3, B2, B1]
-  ctype = UInt8['O', 'O', 'O']
-  for char in text
-    push!(segment, char)
-    push!(ctype, _ctype(char))
-  end
-
-  segment = vcat(segment, [E1, E2, E3])
-  ctype = vcat(ctype, UInt8['O', 'O', 'O'])
-
   wordstart = start(text)
   pos = wordstart
+
   p1 = Uchar
   p2 = Uchar
   p3 = Uchar
-  for i in 5:(length(segment)-3)
+  w1, w2, w3 = B3, B2, B1
+  c1, c2, c3 = Ochar, Ochar, Ochar
+  w4 = text[pos]
+  c4 = ctype(w4)
+
+  pos1 = nextind(text, pos) # pos + 1 character
+  pos2 = nextind(text, pos1) # pos + 2 characters
+  if pos == endof(text)
+    w5, w6 = E1, E2
+    c5, c6 = Ochar, Ochar
+  else
+    w5 = text[pos1]
+    c5 = ctype(w5)
+    if pos1 == endof(text)
+      w6 = E1
+      c6 = Ochar
+    else
+      w6 = text[pos2]
+      c6 = ctype(w6)
+    end
+  end
+
+  while pos < endof(text)
     score = BIAS
-    w1 = segment[i-3]
-    w2 = segment[i-2]
-    w3 = segment[i-1]
-    w4 = segment[i]
-    w5 = segment[i+1]
-    w6 = segment[i+2]
-    c1 = ctype[i-3]
-    c2 = ctype[i-2]
-    c3 = ctype[i-1]
-    c4 = ctype[i]
-    c5 = ctype[i+1]
-    c6 = ctype[i+2]
+    w1,w2,w3,w4,w5 = w2,w3,w4,w5,w6
+    c1,c2,c3,c4,c5 = c2,c3,c4,c5,c6
+    pos3 = nextind(text, pos2) # pos + 3
+    if pos3 <= endof(text)
+      w6 = text[pos3]
+      c6 = ctype(w6)
+    elseif pos2 == endof(text)
+      w6 = E1
+      c6 = Ochar
+    else # pos1 == endof(text)
+      w6 = E2
+      c6 = Ochar
+    end
 
     if p1 == Ochar; score += -214; end # score += get(UP1, p1, 0)
     if p2 == Bchar; score += 69; elseif p2 == Ochar; score += 935; end # score += get(UP2, p2, 0)
@@ -168,18 +181,20 @@ function tokenize{T<:AbstractString}(text::T)
     score += get(TQ2, (p2, c2, c3, c4), 0)
     score += get(TQ3, (p3, c1, c2, c3), 0)
     score += get(TQ4, (p3, c2, c3, c4), 0)
+
     p = Ochar
     if score > 0
       push!(result, SubString(text, wordstart, pos))
-      wordstart = pos = nextind(text, pos)
+      wordstart = pos1
       p = Bchar
-    else
-      pos = nextind(text, pos) # text[pos] == segment[i]
     end
 
     p1 = p2
     p2 = p3
     p3 = p
+    pos = pos1
+    pos1 = pos2
+    pos2 = pos3
   end
 
   push!(result, SubString(text, wordstart, pos))
