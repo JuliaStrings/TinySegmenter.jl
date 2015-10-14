@@ -1,7 +1,7 @@
 __precompile__()
 module TinySegmenter
 
-export Segmenter, tokenize
+export tokenize
 
 typealias US UTF8String
 
