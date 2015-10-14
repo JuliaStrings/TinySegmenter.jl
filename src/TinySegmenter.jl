@@ -100,7 +100,8 @@ function tokenize(text::AbstractString)
   segment = vcat(segment, [E1, E2, E3])
   ctype = vcat(ctype, UInt8['O', 'O', 'O'])
 
-  word = string(segment[4])
+  word = IOBuffer()
+  print(word, segment[4])
   p1 = Uchar
   p2 = Uchar
   p3 = Uchar
@@ -122,55 +123,54 @@ function tokenize(text::AbstractString)
     score += get(UP1, p1, 0)
     score += get(UP2, p2, 0)
     score += get(UP3, p3, 0)
-    score += get(BP1, tuple(p1, p2), 0)
-    score += get(BP2, tuple(p2, p3), 0)
+    score += get(BP1, (p1, p2), 0)
+    score += get(BP2, (p2, p3), 0)
     score += get(UW1, w1, 0)
     score += get(UW2, w2, 0)
     score += get(UW3, w3, 0)
     score += get(UW4, w4, 0)
     score += get(UW5, w5, 0)
     score += get(UW6, w6, 0)
-    score += get(BW1, tuple(w2, w3), 0)
-    score += get(BW2, tuple(w3, w4), 0)
-    score += get(BW3, tuple(w4, w5), 0)
-    score += get(TW1, tuple(w1, w2, w3), 0)
-    score += get(TW2, tuple(w2, w3, w4), 0)
-    score += get(TW3, tuple(w3, w4, w5), 0)
-    score += get(TW4, tuple(w4, w5, w6), 0)
+    score += get(BW1, (w2, w3), 0)
+    score += get(BW2, (w3, w4), 0)
+    score += get(BW3, (w4, w5), 0)
+    score += get(TW1, (w1, w2, w3), 0)
+    score += get(TW2, (w2, w3, w4), 0)
+    score += get(TW3, (w3, w4, w5), 0)
+    score += get(TW4, (w4, w5, w6), 0)
     score += get(UC1, c1, 0)
     score += get(UC2, c2, 0)
     score += get(UC3, c3, 0)
     score += get(UC4, c4, 0)
     score += get(UC5, c5, 0)
     score += get(UC6, c6, 0)
-    score += get(BC1, tuple(c2, c3), 0)
-    score += get(BC2, tuple(c3, c4), 0)
-    score += get(BC3, tuple(c4, c5), 0)
-    score += get(UQ1, tuple(p1, c1), 0)
-    score += get(UQ2, tuple(p2, c2), 0)
-    score += get(UQ3, tuple(p3, c3), 0)
-    score += get(BQ1, tuple(p2, c2, c3), 0)
-    score += get(BQ2, tuple(p2, c3, c4), 0)
-    score += get(BQ3, tuple(p3, c2, c3), 0)
-    score += get(BQ4, tuple(p3, c3, c4), 0)
-    score += get(TQ1, tuple(p2, c1, c2, c3), 0)
-    score += get(TQ2, tuple(p2, c2, c3, c4), 0)
-    score += get(TQ3, tuple(p3, c1, c2, c3), 0)
-    score += get(TQ4, tuple(p3, c2, c3, c4), 0)
+    score += get(BC1, (c2, c3), 0)
+    score += get(BC2, (c3, c4), 0)
+    score += get(BC3, (c4, c5), 0)
+    score += get(UQ1, (p1, c1), 0)
+    score += get(UQ2, (p2, c2), 0)
+    score += get(UQ3, (p3, c3), 0)
+    score += get(BQ1, (p2, c2, c3), 0)
+    score += get(BQ2, (p2, c3, c4), 0)
+    score += get(BQ3, (p3, c2, c3), 0)
+    score += get(BQ4, (p3, c3, c4), 0)
+    score += get(TQ1, (p2, c1, c2, c3), 0)
+    score += get(TQ2, (p2, c2, c3, c4), 0)
+    score += get(TQ3, (p3, c1, c2, c3), 0)
+    score += get(TQ4, (p3, c2, c3, c4), 0)
     p = Ochar
     if score > 0
-      push!(result, word)
-      word = ""
+      push!(result, takebuf_string(word))
       p = Bchar
     end
 
     p1 = p2
     p2 = p3
     p3 = p
-    word = string(word, segment[i])
+    print(word, segment[i])
   end
 
-  push!(result, word)
+  push!(result, takebuf_string(word))
   return result
 end
 
