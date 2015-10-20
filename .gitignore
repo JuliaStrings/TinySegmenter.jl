@@ -1,3 +1,6 @@
 *.jl.cov
 *.jl.*.cov
 *.jl.mem
+benchmark/*.txt
+*.pyc
+*/.python-version
