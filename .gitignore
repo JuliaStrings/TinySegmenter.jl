@@ -4,3 +4,4 @@
 benchmark/*.txt
 *.pyc
 */.python-version
+*/.ruby-version
