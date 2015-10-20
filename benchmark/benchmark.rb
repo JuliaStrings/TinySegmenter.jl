@@ -11,7 +11,7 @@ num = 100
 
 Benchmark.bm 10 do |r|
   r.report "segment" do
-    100.times do
+    5.times do
       ts.segment(text)
     end
   end
