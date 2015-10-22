@@ -6,7 +6,7 @@ var segmenter = new TinySegmenter();
 
 var i = 0;
 var start = Date.now();
-for (i = 0; i < 100; i++) {
+for (i = 0; i < 10; i++) {
   segmenter.segment(texts);
 }
 var end = Date.now();
