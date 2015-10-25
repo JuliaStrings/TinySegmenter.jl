@@ -187,6 +187,7 @@ if __name__ == '__main__':
     f = open('timemachineu8j.txt')
     text = f.read()
     loop = 10
+    tokenize('ウォームアップするぞ')
     with Benchmarker(width=20) as bench:
         @bench("tokenize")
         def _(bm):
