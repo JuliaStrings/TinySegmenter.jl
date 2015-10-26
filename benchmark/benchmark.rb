@@ -9,7 +9,7 @@ ts = TinySegmenter.new
 
 num = 10
 
-Benchmark.bm 10 do |r|
+Benchmark.bmbm 10 do |r|
   r.report "segment" do
     num.times do
       ts.segment(text)
