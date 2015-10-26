@@ -15,6 +15,6 @@ Currently, following languages implementations are included.
 
 ## Benchmark text
 [The Time Machine](https://en.wikipedia.org/wiki/The_Time_Machine) written by H.G. Wells translated by Hiroo Yamagata.
-The text is allowed to use and copy including business use with copy rights.
+The text is allowed to use and copy including business use with copy rights under CC BY-SA 2.0
 
 http://www.genpaku.org/timemachine/timemachineu8j.txt

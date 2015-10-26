@@ -17,3 +17,21 @@ join(tokenize("私の名前は中野です"), " | ")
 The return value of `tokenize` is an array of substrings of the string input,
 giving the locations of the tokens in the text.  (Substrings are represented
 by the `SubString` Julia type.)
+
+## Benchmarks
+
+JavaScript (Node.js) | Python2 | Python3 | Julia | Ruby
+---| ---|---|---|---
+9.29 | 85.34 | 18.87 | 1.31 | 16.76
+
+### Environments
+
+- Intel(R) Core(TM) i5-3210M CPU @ 2.50GHz
+- 8 GB 1600 MHz DDR3
+- MacBook Pro (Retina, 13-inch, Late 2012) El Capitan
+
+### Text
+[The Time Machine](https://en.wikipedia.org/wiki/The_Time_Machine) written by H.G. Wells translated by Hiroo Yamagata.
+The text is allowed to use and copy including business use with copy rights under CC BY-SA 2.0
+
+http://www.genpaku.org/timemachine/timemachineu8j.txt
