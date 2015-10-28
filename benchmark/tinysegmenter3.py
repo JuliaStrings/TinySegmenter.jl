@@ -14,11 +14,6 @@
 from __future__ import unicode_literals
 
 import re
-from benchmarker import Benchmarker
-try:
-    xrange
-except NameError:
-    xrange = range       # for Python3
 
 __all__ = ["tokenize"]
 
@@ -91,10 +86,8 @@ def tokenize(text):
     result = []
     seg = ["B3","B2","B1"]
     ctype = ["O","O","O"]
-    o = list(text)
-    for i in range(0, len(o)):
-        seg.append(o[i])
-        ctype.append(_ctype(o[i]))
+    seg.extend(text)
+    ctype.extend(map(_ctype, text))
 
     seg.append("E1")
     seg.append("E2")
@@ -185,6 +178,12 @@ def demo():
     print(' | '.join(tokenize("私の名前は中野です")))
 
 if __name__ == '__main__':
+    from benchmarker import Benchmarker
+    try:
+        xrange
+    except NameError:
+        xrange = range       # for Python3
+
     f = open('timemachineu8j.txt')
     text = f.read()
     loop = 10
