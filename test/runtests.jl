@@ -5,6 +5,13 @@ using Base.Test
 @test tokenize("TinySegmenterは25kBで書かれています。")　== ["TinySegmenter", "は", "2", "5", "kB", "で", "書か", "れ", "て", "い", "ます", "。"]
 @test tokenize("") == []
 
+f = open("timemachineu8j.txt");
+s = join(readlines(f));
+result_text = join(TinySegmenter.tokenize(s), " | ");
+f2 = open("timemachineu8j.tokenized.txt")
+js_result_text = join(readlines(f2));
+@test result_text == js_result_text
+
 import TinySegmenter.ctype
 @test ctype('一') == 'M'
 @test ctype('〆') == 'H'
