@@ -20,27 +20,17 @@ by the `SubString` Julia type.)
 
 ## Benchmarks
 
+The following are times in seconds for a benchmark (see [benchmark/README.md](benchmark/README.md)) of TinySegmenter
+implementations in different languages tokenizing a large (243kB) Japanese text:
+
 JavaScript (Node.js) | Python2 | Python3 | Julia | Ruby
 ---| ---|---|---|---
 9.29 | 85.34 | 18.87 | 1.31 | 16.76
 
-### Environments
+The benchmark was performed on the following machine:
 
-- Intel(R) Core(TM) i5-3210M CPU @ 2.50GHz
-- 8 GB 1600 MHz DDR3
-- MacBook Pro (Retina, 13-inch, Late 2012) El Capitan
+- Intel Core i5-3210M CPU at 2.50GHz
+- 8GB RAM (1600MHz DDR3)
+- MacBook Pro (Retina, 13-inch, Late 2012), MacOS 10.11 ("El Capitan")
 
-### Text
-[The Time Machine](https://en.wikipedia.org/wiki/The_Time_Machine) written by H.G. Wells translated by Hiroo Yamagata.
-The following texts are under CC BY-SA 2.0 License.
-
-- ./test/timemachineu8j.txt
-- ./test/timemachineu8j.tokenized.txt
-  - tokenized version of original text
-
-See also:
-
-http://cruel.org/books/timemachine/timemachinej.html
-http://www.genpaku.org/timemachine/timemachineu8j.txt
-
-
+The [benchmark text](http://www.genpaku.org/timemachine/timemachineu8j.txt) was [The Time Machine](https://en.wikipedia.org/wiki/The_Time_Machine) by H.G. Wells, translated to Japanese by Hiroo Yamagata under the CC BY-SA 2.0 License.   We also use the same text for validation (in the `test` directory).
