@@ -18,7 +18,7 @@ const E2 = Char(0x110005)
 
 const BIAS = -332
 
-const BC1 = Dict{Tuple{UInt8,UInt8},Int}(t"HH" => 6, t"II" => 2, t"OH" => -1378)
+const BC1 = Dict{Tuple{UInt8,UInt8},Int}(t"HH" => 6, t"II" => 2461, t"KH" => 406, t"OH" => -1378)
 const BC2 = Dict{Tuple{UInt8,UInt8},Int}(t"AA" => -3267, t"AI" => 2744, t"AN" => -878, t"HH" => -4070, t"HM" => -1711, t"HN" => 4012, t"HO" => 3761, t"IA" => 1327, t"IH" => -1184, t"II" => -1332, t"IK" => 1721, t"IO" => 5492, t"KI" => 3831, t"KK" => -8741, t"MH" => -3132, t"MK" => 3334, t"OO" => -2920)
 const BC3 = Dict{Tuple{UInt8,UInt8},Int}(t"HH" => 996, t"HI" => 626, t"HK" => -721, t"HN" => -1307, t"HO" => -836, t"IH" => -301, t"KK" => 2762, t"MK" => 1079, t"MM" => 4034, t"OA" => -1652, t"OH" => 266)
 const BP1 = Dict{Tuple{UInt8,UInt8},Int}(t"BB" => 295, t"OB" => 304, t"OO" => -125, t"UB" => 352)
