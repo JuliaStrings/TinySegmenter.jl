@@ -34,8 +34,9 @@ JavaScript (Node.js) | Python2 | Python3 | Julia | Ruby
 [The Time Machine](https://en.wikipedia.org/wiki/The_Time_Machine) written by H.G. Wells translated by Hiroo Yamagata.
 The following texts are under CC BY-SA 2.0 License.
 
-./test/timemachineu8j.txt
-./test/timemachineu8j.tokenized.txt (tokenized version of original text)
+- ./test/timemachineu8j.txt
+- ./test/timemachineu8j.tokenized.txt
+  - tokenized version of original text
 
 See also:
 
