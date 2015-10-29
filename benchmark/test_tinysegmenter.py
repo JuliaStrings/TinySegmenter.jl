@@ -1,6 +1,9 @@
 # coding: utf-8
+#
+# Usage: py.test -v test_tinysegmenter.py
+#
+# `pip install -r requirements.txt` is required.
 from __future__ import unicode_literals
-
 import io
 import subprocess
 

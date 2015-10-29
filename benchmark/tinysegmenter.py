@@ -235,16 +235,4 @@ def demo():
     print(' | '.join(tokenize("私の名前は中野です")))
 
 if __name__ == '__main__':
-    import io
-    from benchmarker import Benchmarker
-
-    with io.open('timemachineu8j.txt', encoding='utf-8') as f:
-        text = f.read()
-
-    loop = 10
-    tokenize('ウォームアップするぞ')
-    with Benchmarker(width=20) as bench:
-        @bench("tokenize")
-        def _(bm):
-            for _ in xrange(loop):
-                tokenize(text)
+    demo()
