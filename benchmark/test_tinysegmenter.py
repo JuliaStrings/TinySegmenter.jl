@@ -29,16 +29,17 @@ def test_tokenize():
     assert tokenize("") == []
 
 
-def test_timemachine():
+def test_timemachine(tmpdir):
     with io.open('../test/timemachineu8j.txt', encoding='utf-8') as f:
         text = f.read()
 
     toks = tinysegmenter.tokenize(text)
 
-    with io.open('tokenized.txt', 'w', encoding='utf-8') as f:
-        f.write(' | '.join(toks))
+    out = tmpdir.join("tokenized.txt")
+    out.write_text(' | '.join(toks), encoding='utf-8')
 
+    print(str(out))  # pytest show this only when test failed
     assert 0 == subprocess.call([
             "diff", "-u",
             "../test/timemachineu8j.tokenized.txt",
-            "tokenized.txt"])
+            str(out)])
