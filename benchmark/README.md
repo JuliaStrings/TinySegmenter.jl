@@ -6,10 +6,11 @@ Currently, following languages implementations are included.
 - Julia
   - TinySegmenter.jl
 - Python2, 3
-  - https://github.com/chezou/nltk/blob/master/jpbook/tinysegmenter.py
+  - tinysegmenter.py
+  - execute `pip install -r requirements.txt`
 - Ruby
   - https://github.com/6/tiny_segmenter
-  - execute `gem install tiny_segmenter` before benchmark
+  - execute `bundle install` before benchmark
 - JavaScript
   - http://chasen.org/~taku/software/TinySegmenter/tiny_segmenter-0.2.js
 

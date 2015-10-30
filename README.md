@@ -25,7 +25,7 @@ implementations in different languages tokenizing a large (243kB) Japanese text:
 
 JavaScript (Node.js) | Python2 | Python3 | Julia | Ruby
 ---| ---|---|---|---
-9.29 | 85.34 | 18.87 | 1.31 | 16.76
+9.86 | 11.33 | 11.47 | 1.31 | 17.29
 
 The benchmark was performed on the following machine:
 
