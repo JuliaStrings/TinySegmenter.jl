@@ -1,0 +1,13 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    tiny_segmenter (0.0.6)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  tiny_segmenter (>= 0.0.6)
+
+BUNDLED WITH
+   1.10.6
