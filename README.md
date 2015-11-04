@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/chezou/TinySegmenter.jl.svg?branch=master)](https://travis-ci.org/chezou/TinySegmenter.jl)
 
 TinySegmenter.jl is a Julia version of [TinySegmenter](http://chasen.org/~taku/software/TinySegmenter/), which is an extremely compact Japanese tokenizer
-originaly written in JavaScript by Mr. Taku Kudo.
+originally written in JavaScript by Mr. Taku Kudo.
 
 ## Usage
 
