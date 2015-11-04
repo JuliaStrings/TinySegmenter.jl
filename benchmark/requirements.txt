@@ -1,2 +1,3 @@
 Benchmarker>=4.0.1
 pytest>=2.8.2
+tinysegmenter3==0.1.0
