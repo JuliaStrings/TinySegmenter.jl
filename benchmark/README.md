@@ -8,11 +8,17 @@ Currently, following languages implementations are included.
 - Python2, 3
   - https://github.com/SamuraiT/tinysegmenter
   - execute `pip install -r requirements.txt`
-- Ruby
+- Ruby (still not fastest implementation)
   - https://github.com/6/tiny_segmenter
   - execute `bundle install` before benchmark
 - JavaScript
   - http://chasen.org/~taku/software/TinySegmenter/tiny_segmenter-0.2.js
+
+We use [TinySegmenterMaker implementations](https://github.com/shogo82148/TinySegmenterMaker) for following languages' benchmark
+- Go
+- C++
+- Perl
+- Ruby
 
 ## Benchmark text
 [The Time Machine](https://en.wikipedia.org/wiki/The_Time_Machine) written by H.G. Wells translated by Hiroo Yamagata.
