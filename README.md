@@ -23,9 +23,9 @@ by the `SubString` Julia type.)
 The following are times in seconds for a benchmark (see [benchmark/README.md](benchmark/README.md)) of TinySegmenter
 implementations in different languages tokenizing a large (243kB) Japanese text:
 
-JavaScript (Node.js) | Python2 | Python3 | Julia | Ruby
----| ---|---|---|---
-9.86 | 11.33 | 11.47 | 1.31 | 17.29
+|Ruby | C++ | Perl | JavaScript(Node.js) | Go | Python | Julia |
+|---|---|---|---|---|---|---|---|
+|132.98 | 48 | 134 |105.31 | 10.50 | 111.85 | 11.70 |
 
 The benchmark was performed on the following machine:
 
