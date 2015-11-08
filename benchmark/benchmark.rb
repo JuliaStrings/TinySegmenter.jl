@@ -7,7 +7,7 @@ File.open('timemachineu8j.txt') do |f|
 end
 ts = TinySegmenter.new
 
-num = 10
+num = 100
 
 Benchmark.bmbm 10 do |r|
   r.report "segment" do

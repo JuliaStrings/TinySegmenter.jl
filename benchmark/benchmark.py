@@ -14,7 +14,7 @@ from tinysegmenter import tokenize
 from benchmarker import Benchmarker
 
 
-loop = 10
+loop = 100
 tokenize('ウォームアップするぞ')
 
 with io.open('timemachineu8j.txt', encoding='utf-8') as f:
