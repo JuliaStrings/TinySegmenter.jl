@@ -13,10 +13,10 @@ js_result_text = join(readlines(f2));
 @test result_text == js_result_text
 
 import TinySegmenter.ctype
-@test ctype('一') == 'M'
-@test ctype('〆') == 'H'
-@test ctype('名') == 'H'
-@test ctype('あ') == 'I'
-@test ctype('ア') == 'K'
-@test ctype('Ｚ') == 'A'
-@test ctype('９') == 'N'
+@test ctype('一') == UInt8('M')
+@test ctype('〆') == UInt8('H')
+@test ctype('名') == UInt8('H')
+@test ctype('あ') == UInt8('I')
+@test ctype('ア') == UInt8('K')
+@test ctype('Ｚ') == UInt8('A')
+@test ctype('９') == UInt8('N')
