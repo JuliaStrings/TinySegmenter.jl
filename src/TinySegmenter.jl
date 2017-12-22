@@ -96,7 +96,7 @@ end
 # like nextind, but if i is past the end of the string
 # it just increments i; this makes segmenting at the
 # end of the string more convenient below.
-nextind_pastend(s::AbstractString, i::Int) = i >= endof(s) ? i + 1 : @inbounds(nextind(s, i))
+nextind_pastend(s::AbstractString, i::Int) = i >= endof(s) ? i + 1 : nextind(s, i)
 
 """
     tokenize(text::AbstractString)
