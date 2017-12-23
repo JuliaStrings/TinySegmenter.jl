@@ -93,6 +93,11 @@ function ctype(c::Char)
   return get(CHARDICT, c, '一' <= c <= '龠' ? Hchar : Ochar)
 end
 
+# like nextind, but if i is past the end of the string
+# it just increments i; this makes segmenting at the
+# end of the string more convenient below.
+nextind_pastend(s::AbstractString, i::Int) = i >= endof(s) ? i + 1 : nextind(s, i)
+
 """
     tokenize(text::AbstractString)
 
@@ -102,8 +107,8 @@ into words ("tokens" or "segments"), using the TinySegmenter algorithm.
 It returns an array of substrings consisting of the guessed tokens in
 `text`, in the order that they appear.
 """
-function tokenize{T<:AbstractString}(text::T)
-  result = SubString{T}[]
+function tokenize(text::AbstractString)
+  result = SubString{typeof(text)}[]
   isempty(text) && return result
 
   wordstart = start(text)
@@ -117,8 +122,8 @@ function tokenize{T<:AbstractString}(text::T)
   w4 = text[pos]
   c4 = ctype(w4)
 
-  pos1 = nextind(text, pos) # pos + 1 character
-  pos2 = nextind(text, pos1) # pos + 2 characters
+  pos1 = nextind_pastend(text, pos) # pos + 1 character
+  pos2 = nextind_pastend(text, pos1) # pos + 2 characters
   if pos == endof(text)
     w5, w6 = E1, E2
     c5, c6 = Ochar, Ochar
@@ -138,7 +143,7 @@ function tokenize{T<:AbstractString}(text::T)
     score = BIAS
     w1,w2,w3,w4,w5 = w2,w3,w4,w5,w6
     c1,c2,c3,c4,c5 = c2,c3,c4,c5,c6
-    pos3 = nextind(text, pos2) # pos + 3
+    pos3 = nextind_pastend(text, pos2) # pos + 3
     if pos3 <= endof(text)
       w6 = text[pos3]
       c6 = ctype(w6)
