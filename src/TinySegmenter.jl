@@ -96,7 +96,7 @@ end
 # like nextind, but if i is past the end of the string
 # it just increments i; this makes segmenting at the
 # end of the string more convenient below.
-nextind_pastend(s::AbstractString, i::Int) = i >= endof(s) ? i + 1 : nextind(s, i)
+nextind_pastend(s::AbstractString, i::Int) = i >= lastindex(s) ? i + 1 : nextind(s, i)
 
 """
     tokenize(text::AbstractString)
@@ -111,7 +111,7 @@ function tokenize(text::AbstractString)
   result = SubString{typeof(text)}[]
   isempty(text) && return result
 
-  wordstart = start(text)
+  wordstart = firstindex(text)
   pos = wordstart
 
   p1 = Uchar
@@ -124,13 +124,13 @@ function tokenize(text::AbstractString)
 
   pos1 = nextind_pastend(text, pos) # pos + 1 character
   pos2 = nextind_pastend(text, pos1) # pos + 2 characters
-  if pos == endof(text)
+  if pos == lastindex(text)
     w5, w6 = E1, E2
     c5, c6 = Ochar, Ochar
   else
     w5 = text[pos1]
     c5 = ctype(w5)
-    if pos1 == endof(text)
+    if pos1 == lastindex(text)
       w6 = E1
       c6 = Ochar
     else
@@ -139,18 +139,18 @@ function tokenize(text::AbstractString)
     end
   end
 
-  while pos < endof(text)
+  while pos < lastindex(text)
     score = BIAS
     w1,w2,w3,w4,w5 = w2,w3,w4,w5,w6
     c1,c2,c3,c4,c5 = c2,c3,c4,c5,c6
     pos3 = nextind_pastend(text, pos2) # pos + 3
-    if pos3 <= endof(text)
+    if pos3 <= lastindex(text)
       w6 = text[pos3]
       c6 = ctype(w6)
-    elseif pos2 == endof(text)
+    elseif pos2 == lastindex(text)
       w6 = E1
       c6 = Ochar
-    else # pos1 == endof(text)
+    else # pos1 == lastindex(text)
       w6 = E2
       c6 = Ochar
     end
