@@ -1,5 +1,6 @@
 __precompile__()
 module TinySegmenter
+using Compat
 
 export tokenize
 
