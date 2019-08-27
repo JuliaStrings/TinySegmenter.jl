@@ -1,4 +1,4 @@
-using TinySegmenter, Compat, Compat.Test
+using TinySegmenter, Test
 
 @test tokenize("私の名前は中野です") == ["私", "の", "名前", "は", "中野", "です"]
 @test tokenize("TinySegmenterは25kBで書かれています。")　== ["TinySegmenter", "は", "2", "5", "kB", "で", "書か", "れ", "て", "い", "ます", "。"]
